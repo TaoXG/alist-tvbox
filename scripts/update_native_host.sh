@@ -1,4 +1,4 @@
-BASE_DIR=/etc/xiaoya
+BASE_DIR=/mnt/sda1/xiaoya-tvbox/data
 TAG="native-host"
 UPDATE=false
 MOUNT=""
@@ -68,7 +68,7 @@ fi
 
 echo -e "\e[33m重启应用，host网络模式\e[0m"
 docker rm -f xiaoya-tvbox 2>/dev/null && \
-docker run -d --network host -v "$BASE_DIR":/data ${MOUNT} --restart=always --name=xiaoya-tvbox haroldli/xiaoya-tvbox:${TAG}
+docker run -d --network host -v "$BASE_DIR":/data -v /mnt/sda1/xiaoya-tvbox/tvbox:/www/tvbox  -v /mnt/sda1/本地视频:/video ${MOUNT} --restart=always --name=xiaoya-tvbox haroldli/xiaoya-tvbox:${TAG}
 
 echo -e "\n\e[32m请使用以下命令查看日志输出：\e[0m"
 echo -e "    docker logs -f xiaoya-tvbox\n"
